@@ -7,34 +7,14 @@
   <script src="https://cdn.jsdelivr.net/npm/mathjs@13.2.0/lib/browser/math.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
   <style>
-    :root { --bg:#f6f7fb; --panel:#fff; --line:#d9deea; --text:#172033; --muted:#5f6b7a; --accent:#2563eb; }
-    * { box-sizing: border-box; }
-    body { margin:0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:var(--bg); color:var(--text); }
-    header { padding:18px 20px; background:#0f172a; color:white; }
-    header h1 { margin:0; font-size:20px; }
-    header p { margin:6px 0 0; color:#cbd5e1; font-size:13px; }
-    main { display:grid; grid-template-columns: 360px 1fr; gap:16px; padding:16px; }
-    @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
-    .panel { background:var(--panel); border:1px solid var(--line); border-radius:12px; box-shadow:0 1px 3px rgba(15,23,42,.05); }
-    .controls { padding:14px; align-self:start; }
-    .section { border-top:1px solid var(--line); padding-top:12px; margin-top:12px; }
-    .section:first-child { border-top:0; padding-top:0; margin-top:0; }
-    h2 { font-size:15px; margin:0 0 10px; }
-    label { display:grid; grid-template-columns: 1fr 120px; align-items:center; gap:8px; font-size:13px; margin:7px 0; color:var(--text); }
-    input, select { width:100%; border:1px solid #cbd5e1; border-radius:8px; padding:7px 8px; font-size:13px; background:white; }
-    .checks label { grid-template-columns: 22px 1fr; }
-    button { width:100%; border:0; background:var(--accent); color:white; padding:12px 14px; border-radius:10px; font-weight:700; font-size:15px; cursor:pointer; margin-top:12px; }
-    button:disabled { opacity:.5; cursor:wait; }
-    .note { font-size:12px; color:var(--muted); line-height:1.5; }
-    .output { display:grid; gap:16px; }
-    .card { padding:14px; }
-    .plot { width:100%; min-height:360px; }
-    #log { white-space:pre-wrap; background:#0b1020; color:#dbeafe; padding:12px; border-radius:10px; font-size:12px; overflow:auto; max-height:260px; }
-    table { width:100%; border-collapse:collapse; font-size:12px; }
-    th, td { border-bottom:1px solid var(--line); padding:7px; text-align:right; }
-    th:first-child, td:first-child { text-align:left; }
-    th { background:#f8fafc; }
-    .small { font-size:12px; color:var(--muted); }
+    :root{--bg:#f6f7fb;--panel:#fff;--line:#d9deea;--text:#172033;--muted:#5f6b7a;--accent:#2563eb}
+    *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+    header{padding:18px 20px;background:#0f172a;color:white}header h1{margin:0;font-size:20px}header p{margin:6px 0 0;color:#cbd5e1;font-size:13px}
+    main{display:grid;grid-template-columns:360px 1fr;gap:16px;padding:16px}@media(max-width:900px){main{grid-template-columns:1fr}}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 3px rgba(15,23,42,.05)}.controls{padding:14px;align-self:start}.section{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}.section:first-child{border-top:0;padding-top:0;margin-top:0}
+    h2{font-size:15px;margin:0 0 10px}label{display:grid;grid-template-columns:1fr 120px;align-items:center;gap:8px;font-size:13px;margin:7px 0}input,select{width:100%;border:1px solid #cbd5e1;border-radius:8px;padding:7px 8px;font-size:13px;background:white}.checks label{grid-template-columns:22px 1fr}
+    button{width:100%;border:0;background:var(--accent);color:white;padding:12px 14px;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer;margin-top:12px}button:disabled{opacity:.55;cursor:wait}.note{font-size:12px;color:var(--muted);line-height:1.5}.output{display:grid;gap:16px}.card{padding:14px}.plot{width:100%;min-height:360px}#log{white-space:pre-wrap;background:#0b1020;color:#dbeafe;padding:12px;border-radius:10px;font-size:12px;overflow:auto;max-height:260px}
+    table{width:100%;border-collapse:collapse;font-size:12px}th,td{border-bottom:1px solid var(--line);padding:7px;text-align:right}th:first-child,td:first-child{text-align:left}th{background:#f8fafc}
   </style>
 </head>
 <body>
@@ -44,16 +24,14 @@
 </header>
 <main>
   <aside class="panel controls">
-    <div class="section">
-      <h2>信号条件</h2>
+    <div class="section"><h2>信号条件</h2>
       <label>周波数 [Hz]<input id="freq" type="number" value="50000" step="1000"></label>
       <label>電圧 High [V]<input id="vHigh" type="number" value="24" step="1"></label>
       <label>Duty<input id="duty" type="number" value="0.5" step="0.05"></label>
       <label>B相位相差 [deg]<input id="bPhase" type="number" value="90" step="5"></label>
       <label>立上り/立下り [us]<input id="riseFall" type="number" value="2" step="0.1"></label>
     </div>
-    <div class="section">
-      <h2>ケーブル条件</h2>
+    <div class="section"><h2>ケーブル条件</h2>
       <label>長さ [m]<input id="length" type="number" value="350" step="10"></label>
       <label>導体サイズ<select id="conductor"><option value="0.65mm">0.65mm</option><option value="0.9mm" selected>0.9mm</option><option value="1.2mm">1.2mm</option></select></label>
       <label>A-COM容量 [pF/m]<input id="cAC" type="number" value="100" step="5"></label>
@@ -65,8 +43,7 @@
       <label>Z0 A-COM [Ω]<input id="z0AC" type="number" value="100" step="5"></label>
       <label>Z0 B-COM [Ω]<input id="z0BC" type="number" value="100" step="5"></label>
     </div>
-    <div class="section">
-      <h2>出力・入力条件</h2>
+    <div class="section"><h2>出力・入力条件</h2>
       <label>出力内部R A [Ω]<input id="rsA" type="number" value="50" step="1"></label>
       <label>出力内部R B [Ω]<input id="rsB" type="number" value="50" step="1"></label>
       <label>出力側追加R [Ω]<input id="rdOut" type="number" value="47" step="1"></label>
@@ -77,23 +54,17 @@
       <label>ONしきい値 [V]<input id="onTh" type="number" value="15" step="0.5"></label>
       <label>OFFしきい値 [V]<input id="offTh" type="number" value="5" step="0.5"></label>
     </div>
-    <div class="section">
-      <h2>計算条件</h2>
+    <div class="section"><h2>計算条件</h2>
       <label>分割数 N_SEG<input id="nSeg" type="number" value="18" step="1"></label>
       <label>刻み DT [ns]<input id="dtNs" type="number" value="20" step="5"></label>
       <label>表示周期数<input id="cycles" type="number" value="4" step="1"></label>
       <label>COM接地R [Ω]<input id="comGroundR" type="number" value="0.1" step="0.1"></label>
       <label>数値リークR [Ω]<input id="leakR" type="number" value="1000000000" step="1000000"></label>
-      <div class="checks">
-        <label><input id="caseNo" type="checkbox" checked>ダンピングなし</label>
-        <label><input id="caseOut" type="checkbox" checked>出力側47Ω</label>
-        <label><input id="caseIn" type="checkbox" checked>入力側47Ω</label>
-      </div>
+      <div class="checks"><label><input id="caseNo" type="checkbox" checked>ダンピングなし</label><label><input id="caseOut" type="checkbox" checked>出力側47Ω</label><label><input id="caseIn" type="checkbox" checked>入力側47Ω</label></div>
       <button id="runBtn">シミュレーション実行</button>
-      <p class="note">重い場合は N_SEG=12〜15、DT=30ns へ変更してください。50kHzではON幅10usのため、10us入力フィルタ後が特に重要です。</p>
+      <p class="note">今回の版では、線路インダクタを後退オイラー法の等価アドミタンスで解くため、ケーブル長100mなどでも発散しにくくしています。重い場合は N_SEG=12〜15、DT=30ns にしてください。</p>
     </div>
   </aside>
-
   <section class="output">
     <div class="panel card"><h2>条件・ログ</h2><div id="log">Run simulation.</div></div>
     <div class="panel card"><h2>判定表</h2><div id="metrics"></div></div>
@@ -103,189 +74,30 @@
     <div class="panel card"><h2>詳細：最後に計算したケース</h2><div id="plotDetail" class="plot"></div></div>
   </section>
 </main>
-
 <script>
-const R_TABLE = {"0.65mm":56.8, "0.9mm":29.2, "1.2mm":16.5};
-const $ = (id) => document.getElementById(id);
-const num = (id) => Number($(id).value);
-const pfm = (id) => num(id) * 1e-12;
-
-function log(msg){ $("log").textContent = msg; }
-function zeros(n){ return Array(n).fill(0); }
-function matrix(n){ return Array.from({length:n}, () => Array(n).fill(0)); }
-function stampCap(C,n1,n2,c){ if(!c) return; if(n2==null){C[n1][n1]+=c;} else {C[n1][n1]+=c;C[n2][n2]+=c;C[n1][n2]-=c;C[n2][n1]-=c;} }
-function stampRes(G,n1,n2,r){ if(r==null) return; const g=1/r; if(n2==null){G[n1][n1]+=g;} else {G[n1][n1]+=g;G[n2][n2]+=g;G[n1][n2]-=g;G[n2][n1]-=g;} }
-function matVec(A,x){ const n=A.length, y=Array(n).fill(0); for(let i=0;i<n;i++){let s=0; const Ai=A[i]; for(let j=0;j<n;j++) s+=Ai[j]*x[j]; y[i]=s;} return y; }
-function mat3Inv(M){ return math.inv(M).valueOf(); }
-function mat3Vec(A,x){ return [A[0][0]*x[0]+A[0][1]*x[1]+A[0][2]*x[2], A[1][0]*x[0]+A[1][1]*x[1]+A[1][2]*x[2], A[2][0]*x[0]+A[2][1]*x[1]+A[2][2]*x[2]]; }
-function addVec(a,b){ const y=Array(a.length); for(let i=0;i<a.length;i++) y[i]=a[i]+b[i]; return y; }
-function scaleMatAdd(C, dt, G){ const n=C.length, A=matrix(n); for(let i=0;i<n;i++){for(let j=0;j<n;j++) A[i][j]=C[i][j]/dt+G[i][j];} return A; }
-
-function getParams(){
-  const f=num('freq'); const T=1/f; const periodUs=1e6/f; const duty=num('duty');
-  const len=num('length'); const nSeg=Math.max(4, Math.floor(num('nSeg'))); const dx=len/nSeg;
-  const rPerM=R_TABLE[$('conductor').value]/1000;
-  const cAC=pfm('cAC'), cBC=pfm('cBC');
-  const z0AC=num('z0AC'), z0BC=num('z0BC');
-  const LloopAC=z0AC*z0AC*cAC, LloopBC=z0BC*z0BC*cBC;
-  const LA=0.5*LloopAC, LB=0.5*LloopBC, LC=0.5*Math.max(LloopAC,LloopBC);
-  return {
-    vHigh:num('vHigh'), vLow:0, f, T, periodUs, duty, onUs:duty*periodUs, offUs:(1-duty)*periodUs,
-    bDelayUs:periodUs*num('bPhase')/360, riseFallUs:num('riseFall'), len, nSeg, dx,
-    rAseg:rPerM*dx, rBseg:rPerM*dx, rCseg:rPerM*dx,
-    rAtotal:rPerM*len, rBtotal:rPerM*len, rCtotal:rPerM*len,
-    cAC, cBC, cAB:pfm('cAB'), cAE:pfm('cAE'), cBE:pfm('cBE'), cCE:pfm('cCE'),
-    LAseg:LA*dx, LBseg:LB*dx, LCseg:LC*dx,
-    vpAC:1/Math.sqrt(LloopAC*cAC), vpBC:1/Math.sqrt(LloopBC*cBC),
-    rsA:num('rsA'), rsB:num('rsB'), rdOut:num('rdOut'), rInSeries:num('rInSeries'),
-    rin:num('rin'), cin:num('inputTau')*1e-6/num('rin'), filterTauUs:num('filterTau'),
-    onTh:num('onTh'), offTh:num('offTh'), dt:num('dtNs')*1e-9, dtNs:num('dtNs'), cycles:Math.floor(num('cycles')),
-    comGroundR:num('comGroundR'), leakR:num('leakR')
-  };
-}
-
-function pulse(t, delay, p){
-  const tr=p.riseFallUs*1e-6, on=p.duty*p.T;
-  let ph=((t-delay)%p.T+p.T)%p.T;
-  if(tr<=0) return ph<on ? p.vHigh : p.vLow;
-  if(ph<tr) return p.vLow+(p.vHigh-p.vLow)*ph/tr;
-  if(ph<on-tr) return p.vHigh;
-  if(ph<on) return p.vHigh-(p.vHigh-p.vLow)*(ph-(on-tr))/tr;
-  return p.vLow;
-}
-
-function lowpass(x, tauUs, dt){
-  const tau=tauUs*1e-6; if(tau<=0) return x.slice();
-  const y=Array(x.length).fill(0), a=1-Math.exp(-dt/tau);
-  for(let k=1;k<x.length;k++) y[k]=y[k-1]+a*(x[k]-y[k-1]);
-  return y;
-}
-
-function thresholdEvents(v,p){
-  let on=false, ev=[];
-  for(let k=0;k<v.length;k++){
-    if(!on && v[k]>=p.onTh){on=true; ev.push([k,'ON']);}
-    else if(on && v[k]<=p.offTh){on=false; ev.push([k,'OFF']);}
-  }
-  return ev;
-}
-
-function buildNodeMap(p, inputSeries){
-  const node=new Map(); let idx=0;
-  for(let k=0;k<=p.nSeg;k++) node.set(`A${k}`, idx++);
-  for(let k=0;k<=p.nSeg;k++) node.set(`B${k}`, idx++);
-  for(let k=0;k<=p.nSeg;k++) node.set(`C${k}`, idx++);
-  if(inputSeries){ node.set('A_PLC', idx++); node.set('B_PLC', idx++); }
-  return {node, n:idx};
-}
-function nd(map, key){ return map.node.get(key); }
-
-function buildCircuit(p, cfg){
-  const map=buildNodeMap(p, cfg.inputSeries), n=map.n;
-  const C=matrix(n), G=matrix(n);
-  for(let i=0;i<n;i++) stampRes(G,i,null,p.leakR);
-  for(let k=0;k<=p.nSeg;k++){
-    const w=(k===0||k===p.nSeg)?0.5:1.0;
-    const nA=nd(map,`A${k}`), nB=nd(map,`B${k}`), nC=nd(map,`C${k}`);
-    stampCap(C,nA,nC,p.cAC*p.dx*w); stampCap(C,nB,nC,p.cBC*p.dx*w); stampCap(C,nA,nB,p.cAB*p.dx*w);
-    stampCap(C,nA,null,p.cAE*p.dx*w); stampCap(C,nB,null,p.cBE*p.dx*w); stampCap(C,nC,null,p.cCE*p.dx*w);
-  }
-  stampRes(G,nd(map,'C0'),null,p.comGroundR);
-  const nAe=nd(map,`A${p.nSeg}`), nBe=nd(map,`B${p.nSeg}`), nCe=nd(map,`C${p.nSeg}`);
-  let nAl=nAe, nBl=nBe;
-  if(cfg.inputSeries){ nAl=nd(map,'A_PLC'); nBl=nd(map,'B_PLC'); stampRes(G,nAe,nAl,p.rInSeries); stampRes(G,nBe,nBl,p.rInSeries); }
-  stampRes(G,nAl,nCe,p.rin); stampRes(G,nBl,nCe,p.rin);
-  stampCap(C,nAl,nCe,p.cin); stampCap(C,nBl,nCe,p.cin);
-  return {map,C,G,nAl,nBl,nAe,nBe,nCe,nC0:nd(map,'C0'),nA0:nd(map,'A0'),nB0:nd(map,'B0')};
-}
-
-function simulateCase(p, cfg){
-  const circ=buildCircuit(p,cfg), n=circ.C.length;
-  let A=scaleMatAdd(circ.C,p.dt,circ.G);
-  const rsrcA=p.rsA+(cfg.outputDamping?p.rdOut:0), rsrcB=p.rsB+(cfg.outputDamping?p.rdOut:0);
-  stampRes(A,circ.nA0,circ.nC0,rsrcA); stampRes(A,circ.nB0,circ.nC0,rsrcB);
-  const invObj=math.inv(A); const Ainv=(invObj.valueOf)?invObj.valueOf():invObj;
-  const Lmat=[[p.LAseg,0,0],[0,p.LBseg,0],[0,0,p.LCseg]], Linv=mat3Inv(Lmat);
-  const currents=Array.from({length:p.nSeg},()=>[0,0,0]);
-  let v=zeros(n);
-  const tdUs=Math.max(p.len/p.vpAC, p.len/p.vpBC)*1e6;
-  const endUs=tdUs+p.cycles*p.periodUs+5;
-  const nSteps=Math.ceil(endUs*1e-6/p.dt)+1;
-  const tUs=[], Araw=[], Braw=[], Aflt=[], Bflt=[], COM=[], COMsrc=[];
-  const gsrcA=1/rsrcA, gsrcB=1/rsrcB;
-  for(let step=0; step<nSteps; step++){
-    const time=step*p.dt; tUs.push(time*1e6);
-    for(let k=0;k<p.nSeg;k++){
-      const dv=[ v[nd(circ.map,`A${k}`)]-v[nd(circ.map,`A${k+1}`)], v[nd(circ.map,`B${k}`)]-v[nd(circ.map,`B${k+1}`)], v[nd(circ.map,`C${k}`)]-v[nd(circ.map,`C${k+1}`)] ];
-      const drop=[p.rAseg*currents[k][0], p.rBseg*currents[k][1], p.rCseg*currents[k][2]];
-      const di=mat3Vec(Linv, [dv[0]-drop[0], dv[1]-drop[1], dv[2]-drop[2]]);
-      currents[k][0]+=p.dt*di[0]; currents[k][1]+=p.dt*di[1]; currents[k][2]+=p.dt*di[2];
-    }
-    const I=zeros(n);
-    for(let k=0;k<p.nSeg;k++){
-      const iA=currents[k][0], iB=currents[k][1], iC=currents[k][2];
-      I[nd(circ.map,`A${k}`)]-=iA; I[nd(circ.map,`A${k+1}`)]+=iA;
-      I[nd(circ.map,`B${k}`)]-=iB; I[nd(circ.map,`B${k+1}`)]+=iB;
-      I[nd(circ.map,`C${k}`)]-=iC; I[nd(circ.map,`C${k+1}`)]+=iC;
-    }
-    const va=pulse(time,0,p), vb=pulse(time,p.bDelayUs*1e-6,p);
-    I[circ.nA0]+=gsrcA*va; I[circ.nC0]-=gsrcA*va;
-    I[circ.nB0]+=gsrcB*vb; I[circ.nC0]-=gsrcB*vb;
-    const cvdt=matVec(circ.C, v.map(x=>x/p.dt));
-    const rhs=addVec(cvdt,I);
-    v=matVec(Ainv,rhs);
-    if(!v.every(Number.isFinite)) throw new Error(cfg.name+': non-finite voltage at step '+step);
-    const a=v[circ.nAl]-v[circ.nCe], b=v[circ.nBl]-v[circ.nCe];
-    Araw.push(a); Braw.push(b); COM.push(v[circ.nCe]); COMsrc.push(v[circ.nC0]);
-  }
-  const Af=lowpass(Araw,p.filterTauUs,p.dt), Bf=lowpass(Braw,p.filterTauUs,p.dt);
-  return {name:cfg.name,tUs,Araw,Braw,Afilter:Af,Bfilter:Bf,COM,COMsrc};
-}
-
-function metrics(result,p){
-  const evA=thresholdEvents(result.Afilter,p), evB=thresholdEvents(result.Bfilter,p);
-  return {case:result.name, maxA:Math.max(...result.Araw), minA:Math.min(...result.Araw), maxAf:Math.max(...result.Afilter), maxBf:Math.max(...result.Bfilter), minBf:Math.min(...result.Bfilter), comMax:Math.max(...result.COM), comMin:Math.min(...result.COM), evA:evA.length, evB:evB.length};
-}
-function renderMetrics(rows){
-  let html='<table><thead><tr><th>Case</th><th>A raw max</th><th>A filt max</th><th>B filt max</th><th>COM max</th><th>A events</th><th>B events</th></tr></thead><tbody>';
-  for(const r of rows){ html+=`<tr><td>${r.case}</td><td>${r.maxA.toFixed(2)}</td><td>${r.maxAf.toFixed(2)}</td><td>${r.maxBf.toFixed(2)}</td><td>${r.comMax.toFixed(3)}</td><td>${r.evA}</td><td>${r.evB}</td></tr>`; }
-  html+='</tbody></table>'; $('metrics').innerHTML=html;
-}
-function thresholdShapes(p){ return [{type:'line',x0:0,x1:1,y0:p.onTh,y1:p.onTh,xref:'paper',line:{dash:'dash',color:'#ef4444'}},{type:'line',x0:0,x1:1,y0:p.offTh,y1:p.offTh,xref:'paper',line:{dash:'dash',color:'#f97316'}}]; }
-function plotResults(results,p){
-  const layoutBase={margin:{l:55,r:20,t:35,b:45},xaxis:{title:'Time [us]'},yaxis:{title:'Voltage [V]'},shapes:thresholdShapes(p),legend:{orientation:'h'}};
-  Plotly.newPlot('plotA', results.map(r=>({x:r.tUs,y:r.Afilter,type:'scatter',mode:'lines',name:r.name})), {...layoutBase,title:'A phase after input filter'});
-  Plotly.newPlot('plotB', results.map(r=>({x:r.tUs,y:r.Bfilter,type:'scatter',mode:'lines',name:r.name})), {...layoutBase,title:'B phase after input filter'});
-  Plotly.newPlot('plotCOM', results.map(r=>({x:r.tUs,y:r.COM,type:'scatter',mode:'lines',name:r.name})), {margin:{l:55,r:20,t:35,b:45},xaxis:{title:'Time [us]'},yaxis:{title:'COM Voltage [V]'},title:'COM voltage at PLC side',legend:{orientation:'h'}});
-  const r=results[results.length-1];
-  Plotly.newPlot('plotDetail', [
-    {x:r.tUs,y:r.Araw,type:'scatter',mode:'lines',name:'A before filter'},
-    {x:r.tUs,y:r.Afilter,type:'scatter',mode:'lines',name:'A after filter'},
-    {x:r.tUs,y:r.Braw,type:'scatter',mode:'lines',name:'B before filter'},
-    {x:r.tUs,y:r.Bfilter,type:'scatter',mode:'lines',name:'B after filter'},
-    {x:r.tUs,y:r.COM,type:'scatter',mode:'lines',name:'COM'}
-  ], {...layoutBase,title:'Detail: '+r.name});
-}
-
-async function run(){
-  const btn=$('runBtn'); btn.disabled=true;
-  try{
-    const p=getParams();
-    const tdAC=p.len/p.vpAC*1e6, tdBC=p.len/p.vpBC*1e6;
-    log(`Running...\nFrequency=${p.f} Hz, Period=${p.periodUs.toFixed(3)} us, ON=${p.onUs.toFixed(3)} us, B delay=${p.bDelayUs.toFixed(3)} us\nCable R A-COM loop=${(p.rAtotal+p.rCtotal).toFixed(3)} ohm\nEstimated delay A-COM=${tdAC.toFixed(3)} us, B-COM=${tdBC.toFixed(3)} us\nN_SEG=${p.nSeg}, DT=${p.dtNs} ns`);
-    const cases=[];
-    if($('caseNo').checked) cases.push({name:'No damping',outputDamping:false,inputSeries:false});
-    if($('caseOut').checked) cases.push({name:'Output-side 47 ohm',outputDamping:true,inputSeries:false});
-    if($('caseIn').checked) cases.push({name:'Input-side 47 ohm',outputDamping:false,inputSeries:true});
-    const results=[];
-    for(const c of cases){ log($('log').textContent+`\nSimulating: ${c.name}`); await new Promise(res=>setTimeout(res,10)); results.push(simulateCase(p,c)); }
-    const rows=results.map(r=>metrics(r,p)); renderMetrics(rows); plotResults(results,p);
-    log($('log').textContent+`\nDone.`);
-  }catch(e){ console.error(e); log('ERROR:\n'+e.message+'\n\n詳細はブラウザのConsoleを確認してください。'); }
-  btn.disabled=false;
-}
-$('runBtn').addEventListener('click', run);
-window.addEventListener('load', run);
+const R_TABLE={"0.65mm":56.8,"0.9mm":29.2,"1.2mm":16.5};
+const $=id=>document.getElementById(id);const num=id=>Number($(id).value);const pfm=id=>num(id)*1e-12;
+function log(msg){$('log').textContent=msg}function zeros(n){return Array(n).fill(0)}function matrix(n){return Array.from({length:n},()=>Array(n).fill(0))}
+function stampCap(C,n1,n2,c){if(!c)return;if(n2==null){C[n1][n1]+=c}else{C[n1][n1]+=c;C[n2][n2]+=c;C[n1][n2]-=c;C[n2][n1]-=c}}
+function stampRes(G,n1,n2,r){if(r==null)return;if(r<=0)throw new Error('Resistance must be positive');const g=1/r;if(n2==null){G[n1][n1]+=g}else{G[n1][n1]+=g;G[n2][n2]+=g;G[n1][n2]-=g;G[n2][n1]-=g}}
+function stampAdmit(Ymat,nL,nR,Y){for(let p=0;p<3;p++){for(let q=0;q<3;q++){const y=Y[p][q];Ymat[nL[p]][nL[q]]+=y;Ymat[nL[p]][nR[q]]-=y;Ymat[nR[p]][nL[q]]-=y;Ymat[nR[p]][nR[q]]+=y}}}
+function matVec(A,x){const n=A.length,y=Array(n).fill(0);for(let i=0;i<n;i++){let s=0;for(let j=0;j<n;j++)s+=A[i][j]*x[j];y[i]=s}return y}
+function mat3Vec(A,x){return[A[0][0]*x[0]+A[0][1]*x[1]+A[0][2]*x[2],A[1][0]*x[0]+A[1][1]*x[1]+A[1][2]*x[2],A[2][0]*x[0]+A[2][1]*x[1]+A[2][2]*x[2]]}
+function addVec(a,b){const y=Array(a.length);for(let i=0;i<a.length;i++)y[i]=a[i]+b[i];return y}
+function scaleMatAdd(C,dt,G){const n=C.length,A=matrix(n);for(let i=0;i<n;i++)for(let j=0;j<n;j++)A[i][j]=C[i][j]/dt+G[i][j];return A}
+function getParams(){const f=num('freq'),T=1/f,periodUs=1e6/f,duty=num('duty'),len=num('length'),nSeg=Math.max(4,Math.floor(num('nSeg'))),dx=len/nSeg,rPerM=R_TABLE[$('conductor').value]/1000,cAC=pfm('cAC'),cBC=pfm('cBC'),z0AC=num('z0AC'),z0BC=num('z0BC'),LloopAC=z0AC*z0AC*cAC,LloopBC=z0BC*z0BC*cBC,LA=0.5*LloopAC,LB=0.5*LloopBC,LC=0.5*Math.max(LloopAC,LloopBC);return{vHigh:num('vHigh'),vLow:0,f,T,periodUs,duty,onUs:duty*periodUs,offUs:(1-duty)*periodUs,bDelayUs:periodUs*num('bPhase')/360,riseFallUs:num('riseFall'),len,nSeg,dx,rAseg:rPerM*dx,rBseg:rPerM*dx,rCseg:rPerM*dx,rAtotal:rPerM*len,rBtotal:rPerM*len,rCtotal:rPerM*len,cAC,cBC,cAB:pfm('cAB'),cAE:pfm('cAE'),cBE:pfm('cBE'),cCE:pfm('cCE'),LAseg:LA*dx,LBseg:LB*dx,LCseg:LC*dx,Lmat:[[LA*dx,0,0],[0,LB*dx,0],[0,0,LC*dx]],Rmat:[[rPerM*dx,0,0],[0,rPerM*dx,0],[0,0,rPerM*dx]],vpAC:1/Math.sqrt(LloopAC*cAC),vpBC:1/Math.sqrt(LloopBC*cBC),rsA:num('rsA'),rsB:num('rsB'),rdOut:num('rdOut'),rInSeries:num('rInSeries'),rin:num('rin'),cin:num('inputTau')*1e-6/num('rin'),filterTauUs:num('filterTau'),onTh:num('onTh'),offTh:num('offTh'),dt:num('dtNs')*1e-9,dtNs:num('dtNs'),cycles:Math.floor(num('cycles')),comGroundR:num('comGroundR'),leakR:num('leakR')}}
+function pulse(t,delay,p){if(t<delay)return p.vLow;const tr=p.riseFallUs*1e-6,on=p.duty*p.T;let ph=((t-delay)%p.T+p.T)%p.T;if(tr<=0)return ph<on?p.vHigh:p.vLow;if(ph<tr)return p.vLow+(p.vHigh-p.vLow)*ph/tr;if(ph<on-tr)return p.vHigh;if(ph<on)return p.vHigh-(p.vHigh-p.vLow)*(ph-(on-tr))/tr;return p.vLow}
+function lowpass(x,tauUs,dt){const tau=tauUs*1e-6;if(tau<=0)return x.slice();const y=Array(x.length).fill(0),a=1-Math.exp(-dt/tau);for(let k=1;k<x.length;k++)y[k]=y[k-1]+a*(x[k]-y[k-1]);return y}
+function thresholdEvents(v,p){let on=false,ev=[];for(let k=0;k<v.length;k++){if(!on&&v[k]>=p.onTh){on=true;ev.push([k,'ON'])}else if(on&&v[k]<=p.offTh){on=false;ev.push([k,'OFF'])}}return ev}
+function buildNodeMap(p,inputSeries){const node=new Map();let idx=0;for(let k=0;k<=p.nSeg;k++)node.set(`A${k}`,idx++);for(let k=0;k<=p.nSeg;k++)node.set(`B${k}`,idx++);for(let k=0;k<=p.nSeg;k++)node.set(`C${k}`,idx++);if(inputSeries){node.set('A_PLC',idx++);node.set('B_PLC',idx++)}return{node,n:idx}}function nd(map,key){return map.node.get(key)}
+function buildCircuit(p,cfg){const map=buildNodeMap(p,cfg.inputSeries),n=map.n,C=matrix(n),G=matrix(n);for(let i=0;i<n;i++)stampRes(G,i,null,p.leakR);for(let k=0;k<=p.nSeg;k++){const w=(k===0||k===p.nSeg)?0.5:1,nA=nd(map,`A${k}`),nB=nd(map,`B${k}`),nC=nd(map,`C${k}`);stampCap(C,nA,nC,p.cAC*p.dx*w);stampCap(C,nB,nC,p.cBC*p.dx*w);stampCap(C,nA,nB,p.cAB*p.dx*w);stampCap(C,nA,null,p.cAE*p.dx*w);stampCap(C,nB,null,p.cBE*p.dx*w);stampCap(C,nC,null,p.cCE*p.dx*w)}stampRes(G,nd(map,'C0'),null,p.comGroundR);const nAe=nd(map,`A${p.nSeg}`),nBe=nd(map,`B${p.nSeg}`),nCe=nd(map,`C${p.nSeg}`);let nAl=nAe,nBl=nBe;if(cfg.inputSeries){nAl=nd(map,'A_PLC');nBl=nd(map,'B_PLC');stampRes(G,nAe,nAl,p.rInSeries);stampRes(G,nBe,nBl,p.rInSeries)}stampRes(G,nAl,nCe,p.rin);stampRes(G,nBl,nCe,p.rin);stampCap(C,nAl,nCe,p.cin);stampCap(C,nBl,nCe,p.cin);return{map,C,G,nAl,nBl,nAe,nBe,nCe,nC0:nd(map,'C0'),nA0:nd(map,'A0'),nB0:nd(map,'B0')}}
+function simulateCase(p,cfg){const c=buildCircuit(p,cfg),n=c.C.length;let A=scaleMatAdd(c.C,p.dt,c.G);const rsrcA=p.rsA+(cfg.outputDamping?p.rdOut:0),rsrcB=p.rsB+(cfg.outputDamping?p.rdOut:0);stampRes(A,c.nA0,c.nC0,rsrcA);stampRes(A,c.nB0,c.nC0,rsrcB);const Zmat=[[p.Rmat[0][0]+p.Lmat[0][0]/p.dt,0,0],[0,p.Rmat[1][1]+p.Lmat[1][1]/p.dt,0],[0,0,p.Rmat[2][2]+p.Lmat[2][2]/p.dt]],Y=math.inv(Zmat).valueOf(),LoverDt=[[p.Lmat[0][0]/p.dt,0,0],[0,p.Lmat[1][1]/p.dt,0],[0,0,p.Lmat[2][2]/p.dt]];for(let k=0;k<p.nSeg;k++){const nL=[nd(c.map,`A${k}`),nd(c.map,`B${k}`),nd(c.map,`C${k}`)],nR=[nd(c.map,`A${k+1}`),nd(c.map,`B${k+1}`),nd(c.map,`C${k+1}`)];stampAdmit(A,nL,nR,Y)}const Ainv=math.inv(A).valueOf();const currents=Array.from({length:p.nSeg},()=>[0,0,0]);let v=zeros(n);const tdUs=Math.max(p.len/p.vpAC,p.len/p.vpBC)*1e6,endUs=tdUs+p.cycles*p.periodUs+5,nSteps=Math.ceil(endUs*1e-6/p.dt)+1,tUs=[],Araw=[],Braw=[],COM=[],COMsrc=[],gsrcA=1/rsrcA,gsrcB=1/rsrcB;for(let step=0;step<nSteps;step++){const time=step*p.dt;tUs.push(time*1e6);let I=zeros(n);for(let k=0;k<p.nSeg;k++){const h=mat3Vec(Y,mat3Vec(LoverDt,currents[k]));const nL=[nd(c.map,`A${k}`),nd(c.map,`B${k}`),nd(c.map,`C${k}`)],nR=[nd(c.map,`A${k+1}`),nd(c.map,`B${k+1}`),nd(c.map,`C${k+1}`)];for(let j=0;j<3;j++){I[nL[j]]-=h[j];I[nR[j]]+=h[j]}}const va=pulse(time,0,p),vb=pulse(time,p.bDelayUs*1e-6,p);I[c.nA0]+=gsrcA*va;I[c.nC0]-=gsrcA*va;I[c.nB0]+=gsrcB*vb;I[c.nC0]-=gsrcB*vb;const rhs=addVec(matVec(c.C,v.map(x=>x/p.dt)),I);v=matVec(Ainv,rhs);if(!v.every(Number.isFinite))throw new Error(`${cfg.name}: non-finite voltage at step ${step}`);for(let k=0;k<p.nSeg;k++){const nL=[nd(c.map,`A${k}`),nd(c.map,`B${k}`),nd(c.map,`C${k}`)],nR=[nd(c.map,`A${k+1}`),nd(c.map,`B${k+1}`),nd(c.map,`C${k+1}`)],vd=[v[nL[0]]-v[nR[0]],v[nL[1]]-v[nR[1]],v[nL[2]]-v[nR[2]]],h=mat3Vec(Y,mat3Vec(LoverDt,currents[k])),yv=mat3Vec(Y,vd);currents[k]=[yv[0]+h[0],yv[1]+h[1],yv[2]+h[2]]}Araw.push(v[c.nAl]-v[c.nCe]);Braw.push(v[c.nBl]-v[c.nCe]);COM.push(v[c.nCe]);COMsrc.push(v[c.nC0])}const Af=lowpass(Araw,p.filterTauUs,p.dt),Bf=lowpass(Braw,p.filterTauUs,p.dt);return{name:cfg.name,tUs,Araw,Braw,Afilter:Af,Bfilter:Bf,COM,COMsrc}}
+function metrics(r,p){const evA=thresholdEvents(r.Afilter,p),evB=thresholdEvents(r.Bfilter,p);return{case:r.name,maxA:Math.max(...r.Araw),minA:Math.min(...r.Araw),maxAf:Math.max(...r.Afilter),maxBf:Math.max(...r.Bfilter),minBf:Math.min(...r.Bfilter),comMax:Math.max(...r.COM),comMin:Math.min(...r.COM),evA:evA.length,evB:evB.length}}
+function renderMetrics(rows){let html='<table><thead><tr><th>Case</th><th>A raw max</th><th>A filt max</th><th>B filt max</th><th>COM max</th><th>A events</th><th>B events</th></tr></thead><tbody>';for(const r of rows)html+=`<tr><td>${r.case}</td><td>${r.maxA.toFixed(2)}</td><td>${r.maxAf.toFixed(2)}</td><td>${r.maxBf.toFixed(2)}</td><td>${r.comMax.toFixed(3)}</td><td>${r.evA}</td><td>${r.evB}</td></tr>`;html+='</tbody></table>';$('metrics').innerHTML=html}
+function shapes(p){return[{type:'line',x0:0,x1:1,y0:p.onTh,y1:p.onTh,xref:'paper',line:{dash:'dash',color:'#ef4444'}},{type:'line',x0:0,x1:1,y0:p.offTh,y1:p.offTh,xref:'paper',line:{dash:'dash',color:'#f97316'}}]}
+function plotResults(results,p){const base={margin:{l:55,r:20,t:35,b:45},xaxis:{title:'Time [us]'},yaxis:{title:'Voltage [V]'},shapes:shapes(p),legend:{orientation:'h'}};Plotly.newPlot('plotA',results.map(r=>({x:r.tUs,y:r.Afilter,type:'scatter',mode:'lines',name:r.name})),{...base,title:'A phase after input filter'});Plotly.newPlot('plotB',results.map(r=>({x:r.tUs,y:r.Bfilter,type:'scatter',mode:'lines',name:r.name})),{...base,title:'B phase after input filter'});Plotly.newPlot('plotCOM',results.map(r=>({x:r.tUs,y:r.COM,type:'scatter',mode:'lines',name:r.name})),{margin:{l:55,r:20,t:35,b:45},xaxis:{title:'Time [us]'},yaxis:{title:'COM Voltage [V]'},title:'COM voltage at PLC side',legend:{orientation:'h'}});const r=results[results.length-1];Plotly.newPlot('plotDetail',[{x:r.tUs,y:r.Araw,type:'scatter',mode:'lines',name:'A before filter'},{x:r.tUs,y:r.Afilter,type:'scatter',mode:'lines',name:'A after filter'},{x:r.tUs,y:r.Braw,type:'scatter',mode:'lines',name:'B before filter'},{x:r.tUs,y:r.Bfilter,type:'scatter',mode:'lines',name:'B after filter'},{x:r.tUs,y:r.COM,type:'scatter',mode:'lines',name:'COM'}],{...base,title:'Detail: '+r.name})}
+async function run(){const btn=$('runBtn');btn.disabled=true;try{const p=getParams();const tdAC=p.len/p.vpAC*1e6,tdBC=p.len/p.vpBC*1e6;log(`Running...\nFrequency=${p.f} Hz, Period=${p.periodUs.toFixed(3)} us, ON=${p.onUs.toFixed(3)} us, B delay=${p.bDelayUs.toFixed(3)} us\nCable length=${p.len} m\nCable R A-COM loop=${(p.rAtotal+p.rCtotal).toFixed(3)} ohm\nEstimated delay A-COM=${tdAC.toFixed(3)} us, B-COM=${tdBC.toFixed(3)} us\nN_SEG=${p.nSeg}, DT=${p.dtNs} ns\nSolver=Backward Euler equivalent admittance`);const cases=[];if($('caseNo').checked)cases.push({name:'No damping',outputDamping:false,inputSeries:false});if($('caseOut').checked)cases.push({name:'Output-side 47 ohm',outputDamping:true,inputSeries:false});if($('caseIn').checked)cases.push({name:'Input-side 47 ohm',outputDamping:false,inputSeries:true});const results=[];for(const c of cases){log($('log').textContent+`\nSimulating: ${c.name}`);await new Promise(res=>setTimeout(res,10));results.push(simulateCase(p,c))}renderMetrics(results.map(r=>metrics(r,p)));plotResults(results,p);log($('log').textContent+'\nDone.')}catch(e){console.error(e);log('ERROR:\n'+e.message+'\n\n詳細はブラウザのConsoleを確認してください。')}btn.disabled=false}
+$('runBtn').addEventListener('click',run);window.addEventListener('load',run);
 </script>
 </body>
 </html>
